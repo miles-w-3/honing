@@ -19,12 +19,9 @@ class DomuScrape(Scrape):
         address = match.find(name="div", attrs={'class': 'listing-address'}).getText()
         title_element = match.find(name="a", attrs={'class': 'listing-title'}, href=True)
         title = title_element.getText()
-        link = title_element["href"]
+        link = self.base_url + title_element["href"]
         listing = Listing(address=address, price=price, title=title, url=link)
         acc.append(listing)
-        # print(f"price is {price}")
-        # print(f'address is {address}, title {title}')
-        # print(f'link is {self.base_url}{link}')
       except AttributeError:
         # We aren't going to add an element, print statement
         continue
